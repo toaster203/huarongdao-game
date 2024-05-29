@@ -22,13 +22,13 @@ function App() {
   }, []);
 
   const getMoveDirection = (original, newPosition) => {
-    if (original.positionX + original.width === newPosition.positionX) {
+    if (original.positionX + original.width === newPosition.positionX && original.positionY === newPosition.positionY) {
       return MOVE_DIR.MOVE_RIGHT;
-    } else if(original.positionX - 1 === newPosition.positionX) {
+    } else if(original.positionX - 1 === newPosition.positionX && original.positionY === newPosition.positionY) {
       return MOVE_DIR.MOVE_LEFT
-    } else if(original.positionY - 1 === newPosition.positionY) {
+    } else if(original.positionY - 1 === newPosition.positionY && original.positionX === newPosition.positionX) {
       return MOVE_DIR.MOVE_UP
-    } else if(original.positionY + original.height === newPosition.positionY) {
+    } else if(original.positionY + original.height === newPosition.positionY && original.positionX === newPosition.positionX) {
       return MOVE_DIR.MOVE_DOWN
     }
     return MOVE_DIR.INVALID_MOVE
