@@ -119,7 +119,16 @@ function App() {
           }
         }
       }
+      
       setBlocks([...blocks])
+
+      // add win condition
+      if (originalBlock.name === 'caocao') {
+        if (originalBlock.positionX === 1 && originalBlock.positionY === 3) {
+          alert('You win')
+        }
+      }
+      
     }
   }
 
