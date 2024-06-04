@@ -14,6 +14,7 @@ export const MOVE_DIR = {
 
 function App() {
   const [blocks, setBlocks] = useState([]);
+  const [moves, setMoves] = useState(0);
   const [squareBeingDragged, setSquareBeingDragged] = useState(null);
   const [squareBeingReplaced, setSquareBeingReplaced] = useState(null);
 
@@ -121,6 +122,8 @@ function App() {
       }
       
       setBlocks([...blocks])
+      setMoves(moves + 1);
+      console.log("x",originalBlock.positionX, "y",originalBlock.positionY);
 
       // add win condition
       if (originalBlock.name === 'caocao') {
@@ -153,6 +156,9 @@ function App() {
               onDragEnd={dragEnd}
             />
         ))}
+      </div>
+      <div>
+        <h2>Moves: {moves}</h2>
       </div>
     </div>
   );
