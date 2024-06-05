@@ -3,3 +3,16 @@
   top: calc(50% - 175px);
   left: calc(50% - 140px);
 }
+
+.App {
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.menus {
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}

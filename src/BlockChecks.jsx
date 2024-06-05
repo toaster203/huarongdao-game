@@ -1,8 +1,9 @@
-import { blank1, blank2 } from './createBoard';
+const BLANK_ID_1 = 11;
+const BLANK_ID_2 = 12;
 
 function getBlock(blocks, x, y) {
     const block = blocks.find((block) => {return block.positionX === x && block.positionY === y});
-    if (block.id === blank1.id || block.id === blank2.id) {
+    if (block.id === BLANK_ID_1 || block.id === BLANK_ID_2) {
         return block;
     }
     return null;
