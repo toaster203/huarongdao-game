@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/huarongdao-game/static/css/main.7b7cea11.css",
-    "main.js": "/huarongdao-game/static/js/main.71391759.js",
+    "main.css": "/huarongdao-game/static/css/main.3e5d3c5d.css",
+    "main.js": "/huarongdao-game/static/js/main.0fb15dda.js",
     "static/js/453.3d9e1c85.chunk.js": "/huarongdao-game/static/js/453.3d9e1c85.chunk.js",
     "static/media/caocao.png": "/huarongdao-game/static/media/caocao.1d75d95a6c66d0db6c41.png",
     "static/media/machao.png": "/huarongdao-game/static/media/machao.acd8e1b949820b7991dc.png",
@@ -11,12 +11,12 @@
     "static/media/zhaoyun.png": "/huarongdao-game/static/media/zhaoyun.2570b9c00ddcb3cf88fe.png",
     "static/media/soldier.png": "/huarongdao-game/static/media/soldier.df9a859946107b111396.png",
     "index.html": "/huarongdao-game/index.html",
-    "main.7b7cea11.css.map": "/huarongdao-game/static/css/main.7b7cea11.css.map",
-    "main.71391759.js.map": "/huarongdao-game/static/js/main.71391759.js.map",
+    "main.3e5d3c5d.css.map": "/huarongdao-game/static/css/main.3e5d3c5d.css.map",
+    "main.0fb15dda.js.map": "/huarongdao-game/static/js/main.0fb15dda.js.map",
     "453.3d9e1c85.chunk.js.map": "/huarongdao-game/static/js/453.3d9e1c85.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.7b7cea11.css",
-    "static/js/main.71391759.js"
+    "static/css/main.3e5d3c5d.css",
+    "static/js/main.0fb15dda.js"
   ]
 }
