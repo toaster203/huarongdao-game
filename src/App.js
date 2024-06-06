@@ -15,14 +15,16 @@ const BLANK_ID_1 = 11;
 const BLANK_ID_2 = 12;
 
 function App() {
-  const [blocks, setBlocks] = useState([]);
+  const [blocks, setBlocks] = useState([[],[],[],[],[],[]]);
   const [currentBoard, setCurrentBoard] = useState(0);
   const [moves, setMoves] = useState([0,0,0,0,0,0]);
   const [squareBeingDragged, setSquareBeingDragged] = useState(null);
   const [squareBeingReplaced, setSquareBeingReplaced] = useState(null);
+  const [isOutside, setIsOutside] = useState(false);
 
   useEffect(() => {
-    setBlocks(defaultBoard());
+    const newBlocks = [defaultBoard(), board1(), board2(), board3(), board4(), board5()];
+    setBlocks(newBlocks);
   }, []);
 
   const getMoveDirection = (original, newPosition) => {
@@ -68,13 +70,11 @@ function App() {
       }
     }
 
-
-    
     return MOVE_DIR.INVALID_MOVE
   }
 
   const findBlockByID = (id) => {
-    return blocks.find(block => block.id === id);
+    return blocks[currentBoard].find(block => block.id === id);
   }
 
   const dragStart = (e) => {
@@ -84,10 +84,16 @@ function App() {
 
   const dragDrop = (e) => {
     console.log("stop", e.target);
+    setIsOutside(false);
     setSquareBeingReplaced(e.target);
   }
 
   const dragEnd = (e) => {
+    if (isOutside) {
+      console.log('off board');
+      return;
+    }
+    
     // check if the square is being dropped in a blank square
     const squareBeingDraggedId = parseInt(squareBeingDragged.getAttribute('data-id'));
     const squareBeingReplacedId = parseInt(squareBeingReplaced.getAttribute('data-id'));
@@ -100,12 +106,12 @@ function App() {
 
     if (squareBeingDraggedId && squareBeingReplacedId) {
       if (squareBeingDraggedId === BLANK_ID_1 || squareBeingDraggedId === BLANK_ID_2) {
-        console.log('dragged a blank block')
-        return
+        console.log('dragged a blank block');
+        return;
       }
       if (squareBeingReplacedId !== BLANK_ID_1 && squareBeingReplacedId !== BLANK_ID_2) {
-        console.log('replaced a non-blank block')
-        return
+        console.log('replaced a non-blank block');
+        return;
       }
 
       const moveDir = getMoveDirection(originalBlock, newBlock);
@@ -119,7 +125,7 @@ function App() {
           newBlock.positionY = originalBlock.positionY + originalBlock.height - 1
           originalBlock.positionY -= 1;
         } else {
-          let [block1, block2] = checkAbove(blocks, originalBlock);
+          let [block1, block2] = checkAbove(blocks[currentBoard], originalBlock);
           if (block1 !== null && block2 !== null) {
             block1.positionY = block2.positionY = originalBlock.positionY + originalBlock.height - 1;
             originalBlock.positionY -= 1;
@@ -130,7 +136,7 @@ function App() {
           newBlock.positionY = originalBlock.positionY
           originalBlock.positionY += 1;
         } else{
-          let [block1, block2] = checkBelow(blocks, originalBlock);
+          let [block1, block2] = checkBelow(blocks[currentBoard], originalBlock);
           if (block1 !== null && block2 !== null) {
             block1.positionY = block2.positionY = originalBlock.positionY;
             originalBlock.positionY += 1;
@@ -141,7 +147,7 @@ function App() {
           newBlock.positionX = originalBlock.positionX + originalBlock.width - 1;
           originalBlock.positionX -= 1;
         } else {
-          let [block1, block2] = checkLeft(blocks, originalBlock);
+          let [block1, block2] = checkLeft(blocks[currentBoard], originalBlock);
           if (block1 !== null && block2 !== null) {
             block1.positionX = block2.positionX = originalBlock.positionX + originalBlock.width - 1;
             originalBlock.positionX -= 1;
@@ -152,7 +158,7 @@ function App() {
           newBlock.positionX = originalBlock.positionX;
           originalBlock.positionX += 1;
         } else {
-          let [block1, block2] = checkRight(blocks, originalBlock);
+          let [block1, block2] = checkRight(blocks[currentBoard], originalBlock);
           if (block1 !== null && block2 !== null) {
             block1.positionX = block2.positionX = originalBlock.positionX;
             originalBlock.positionX += 1;
@@ -161,6 +167,8 @@ function App() {
       }
       
       setBlocks([...blocks])
+
+
       const updatedMoves = [...moves];
       updatedMoves[currentBoard] += 1;
       setMoves(updatedMoves);
@@ -175,11 +183,10 @@ function App() {
     }
   }
 
-  
   return (
     <div className="App">
-      <div className="Game">
-        {blocks.map((block, index) => (
+      <div className="Game" onDragLeave={() => setIsOutside(true)}>
+        {blocks[currentBoard].map((block, index) => (
             <img 
               className={block.name}
               key={index}
@@ -203,12 +210,12 @@ function App() {
         </div>
 
         <div>
-          <button onClick={() => {setBlocks(defaultBoard()); setCurrentBoard(0)}}>default</button>
-          <button onClick={() => {setBlocks(board1()); setCurrentBoard(1)}}>1</button>
-          <button onClick={() => {setBlocks(board2()); setCurrentBoard(2)}}>2</button>
-          <button onClick={() => {setBlocks(board3()); setCurrentBoard(3)}}>3</button>
-          <button onClick={() => {setBlocks(board4()); setCurrentBoard(4)}}>4</button>
-          <button onClick={() => {setBlocks(board5()); setCurrentBoard(5)}}>5</button>
+          <button onClick={() => setCurrentBoard(0)}>default</button>
+          <button onClick={() => setCurrentBoard(1)}>1</button>
+          <button onClick={() => setCurrentBoard(2)}>2</button>
+          <button onClick={() => setCurrentBoard(3)}>3</button>
+          <button onClick={() => setCurrentBoard(4)}>4</button>
+          <button onClick={() => setCurrentBoard(5)}>5</button>
         </div>
       </div>
       
